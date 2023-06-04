@@ -19,7 +19,7 @@ module.exports = {
     });
 
     client.user.setPresence({
-      activities: [{ name: `${csgo.raw.numplayers}/${csgo.maxplayers} kişi`, type: ActivityType.Playing }],
+      activities: [ {  name: `👥 ${csgo.raw.numplayers}/${csgo.maxplayers} | 🗺️ ${csgo.map} `, type: ActivityType.Playing }],
       status: 'idle', //idle, dnd, online
     });
     }

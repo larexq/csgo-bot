@@ -1,25 +1,22 @@
 const gamedig = require("gamedig");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
   name: "oyuncu",
-  description: "Sunucudaki belirttiğiniz kullanıcının bilgilerini görürsünüz.",
+  description: "Sunucudaki belirtilen kullanıcının bilgilerini görüntüler.",
   options: [
-        {
-          type: 3,
-          name: "oyuncu",
-          description: "Oyuncunun ismini girin.",
-          required: true
-        }
-    ],
-  
+    {
+      type: 3,
+      name: "oyuncu",
+      description: "Oyuncunun adını girin.",
+      required: true
+    }
+  ],
   
   async execute(client, interaction, config) {
-    
     await interaction.deferReply();
     
     const { user, options, guild } = interaction;
-    
     const server = config.server;
     
     const csgo = await gamedig.query({
@@ -28,20 +25,28 @@ module.exports = {
       port: server.port,
     });
     
-    const player = csgo.players.find(player => player.name === options.getString("oyuncu"));
+    const playerName = options.getString("oyuncu");
+    const player = csgo.players.find(player => player.name === playerName);
    
-    const embed = new EmbedBuilder()
-    .setAuthor({ name: `Kullanıcı Yok`, iconURL: guild.iconURL() })
-    .setDescription(`Belirttiğin kullanıcı bulunamadı.`)
-
-    if(!player) {
-       return interaction.followUp({ embeds: [embed]});
+    if (!player) {
+      const embed = new EmbedBuilder()
+        .setAuthor({ name: `Kullanıcı Bulunamadı`, iconURL: guild.iconURL() })
+        .setDescription(`Belirttiğiniz kullanıcı sunucuda bulunamadı.`);
+        
+      return interaction.followUp({ embeds: [embed] });
     }
        
-     const embed2 = new EmbedBuilder()
-      .setAuthor({ name: player.name + " | Oyuncu Bilgileri", iconURL: guild.iconURL() })
-      .setDescription(`> Score: **${player.raw.score}**\n> Time: **${player.raw.time}**`)
+    let time = "Bulunamadı";
+    if (player.raw.time) {
+      const minutes = Math.floor(player.raw.time / 60);
+      const seconds = player.raw.time % 60;
+      time = `${minutes}:${seconds.toFixed(2)}`;
+    }
+    
+    const embed = new EmbedBuilder()
+      .setAuthor({ name: `${player.name} | Oyuncu Bilgileri`, iconURL: guild.iconURL() })
+      .setDescription(`**Score:** ${player.raw.score || "Bulunamadı"}\n**Time:** ${time}`);
      
-     return interaction.followUp({ embeds: [embed2] })
+    return interaction.followUp({ embeds: [embed] });
   }
 }
