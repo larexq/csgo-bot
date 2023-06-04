@@ -1,4 +1,4 @@
-# Gelişmiş Slashlı Log Bot
+# CSGO Sunucu Bilgi Botu
 
 - **config.json** dosyasından **token, ip ve port** bilgilerini ayarla.
 - **events -> ready.js** dosyasından botun durumunu değiştirebilirsin.
