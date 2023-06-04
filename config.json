@@ -1,0 +1,7 @@
+{
+  "token": "bottoken",
+  "server": {
+    "ip": "sunucuip",
+    "port": "27015"
+  }
+}
