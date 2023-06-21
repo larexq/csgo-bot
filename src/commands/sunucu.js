@@ -38,16 +38,20 @@ module.exports = {
       )
 
       const embed = new EmbedBuilder()
-      .setAuthor({ name: csgo.name, iconURL: guild.iconURL() })
+      .setAuthor({ name: `${csgo.name}`, iconURL: `${guild.iconURL()} ` })
       .setDescription(`\`\`\`fix\nIp Bilgileri\`\`\`\n> Ip: \`${csgo.connect}\`\n> Port: \`27015\`\n> Tıkla Bağlan: [${csgo.connect}](https://steam://connect/${csgo.connect})\n\n\`\`\`fix\n\nAktiflik Bilgileri\`\`\`\n> Oyuncu Sayısı: \`${csgo.raw.numplayers}/${csgo.maxplayers}\`\n> Map: \`${csgo.map}\`\n> Sunucu Aktifmi: \`${durum.toString().replace("1", "Evet").toString().replace("0", "Hayır")}\`\n\n\`\`\`fix\nGameTracker\`\`\`\nSıralama: \`${top || "Bulunamadı"}\``)
+      .setTimestamp()
+      .setFooter({ text: `${user.tag} tarafından istendi.`, iconURL: `${user.displayAvatarURL()} ` })
       
       interaction.followUp({ embeds: [embed], components: [row] })
       }
 
       if(apierror === 1) {
         const embed = new EmbedBuilder()
-        .setAuthor({ name: csgo.name, iconURL: guild.iconURL() })
+        .setAuthor({ name: `${csgo.name}`, iconURL: `${guild.iconURL()} ` })
         .setDescription(`\`\`\`fix\nIp Bilgileri\`\`\`\n> Ip: \`${csgo.connect}\`\n> Port: \`27015\`\n> Tıkla Bağlan: [${csgo.connect}](https://steam://connect/${csgo.connect})\n\n\`\`\`fix\n\nAktiflik Bilgileri\`\`\`\n> Oyuncu Sayısı: \`${csgo.raw.numplayers}/${csgo.maxplayers}\`\n> Map: \`${csgo.map}\`\n> Sunucu Aktifmi: \`Bilinmiyor\`\n\n\`\`\`fix\nGameTracker\`\`\`\nSıralama: \`${top || "Bulunamadı"}\``)
+        .setTimestamp()
+        .setFooter({ text: `${user.tag} tarafından istendi.`, iconURL: `${user.displayAvatarURL()} ` })
         
         interaction.followUp({ embeds: [embed] })
         }

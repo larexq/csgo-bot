@@ -10,13 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "3.0.0",
-    "croxydb": "^0.0.7",
     "discord.js": "^14.11.0",
     "fs": "^0.0.1-security",
     "gamedig": "^4.0.6",
     "request": "^2.88.2"
   },
-  "engines": {
-    "node": "16.x"
-  }
+  "engines": { "node": "16.x" }
 }

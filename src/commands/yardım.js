@@ -15,7 +15,6 @@ module.exports = {
       .setAuthor({ name: `Csgo | Yardım Menüsü`, iconURL: guild.iconURL(), url: "https://discord.gg/dcbot" })
       .setDescription(`> \`/sunucu\`: Sunucu bilgilerinizi gösterir.
       > \`/oynayanlar\`: Sunucunuzdaki oynayan oyunculara bakarsınız.
-      > \`/oyuncu\`: Belirttiğiniz oyuncunun bilgilerini görürsünüz.
       > \`/yardım\`: Bu yardım menüsünü açar.
       > \`/ping\`: Botun pingini gösterir.`)
      
