@@ -24,6 +24,14 @@ module.exports = {
     
     for(const i in csgo.players) {
       players.push(`\`👥\` **|** ${csgo.players[i].name} **|** Time: \`${csgo.players[i].raw.time || "Bulunamadı"}\` **|** Score: \`${csgo.players[i].raw.score || "Bulunamadı"}\``)
+
+      const timeInSeconds = Math.floor(csgo.players[i].raw.time);
+      const hours = Math.floor(timeInSeconds / 3600);
+      const minutes = Math.floor((timeInSeconds % 3600) / 60);
+      const seconds = Math.floor(timeInSeconds % 60);
+      const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+      players.push(`\`👥\` **|** ${csgo.players[i].name} **|** Time: \`${formattedTime || "Bulunamadı"}\` **|** Score: \`${csgo.players[i].raw.score || "Bulunamadı"}\``)
     }
     
     var max = 25;
@@ -148,8 +156,9 @@ module.exports = {
          max -= 25;
          min -= 25;
     
-       const arti = max //max - 25;
-       const eski = min //min - 25;
+
+       const arti = max
+       const eski = min
        
     const a = players.slice(eski, arti)
     const v1 = a.join("\n")
@@ -209,3 +218,4 @@ module.exports = {
     
   }
 }
+
